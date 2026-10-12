@@ -1,0 +1,72 @@
+schema_version: 1
+
+package:
+  name: r-boldconnectr
+  version: ${{ version }}
+
+source:
+  url: https://cran.r-project.org/src/contrib/BOLDconnectR_${{ version }}.tar.gz
+  sha256: 4e570c8317fe48db806a6db75fc4d302ff99770921342d759fe12773b19d5849
+
+build:
+  number: 0
+  script: R CMD INSTALL --build .
+  merge_build_and_host_envs: true
+  dynamic_linking:
+    rpaths:
+      - lib/R/lib/
+      - lib/
+
+requirements:
+  host:
+    - r-BAT >=2.0
+    - r-ape >=5.5
+    - r-base
+    - r-data.table >=1.13
+    - r-dplyr >=1.0.1
+    - r-ggplot2 >=3.3.2
+    - r-httr >=1.4.2
+    - r-jsonlite >=1.7
+    - r-maps >=3.3
+    - r-methods
+    - r-rlang
+    - r-rnaturalearth
+    - r-sf >=0.9.4
+    - r-skimr >=2.1.2
+    - r-tidyr >=1.1.1
+    - r-utils
+    - r-vegan >=2.5.7
+  run:
+    - r-BAT >=2.0
+    - r-ape >=5.5
+    - r-base
+    - r-data.table >=1.13
+    - r-dplyr >=1.0.1
+    - r-ggplot2 >=3.3.2
+    - r-httr >=1.4.2
+    - r-jsonlite >=1.7
+    - r-maps >=3.3
+    - r-methods
+    - r-rlang
+    - r-rnaturalearth
+    - r-sf >=0.9.4
+    - r-skimr >=2.1.2
+    - r-tidyr >=1.1.1
+    - r-utils
+    - r-vegan >=2.5.7
+
+tests:
+  - script:
+      - if: not win
+        then: $R -e "library('BOLDconnectR')"
+      - if: win
+        then: "\"%R%\" -e \"library('BOLDconnectR')\""
+
+about:
+  summary: "Facilitates retrieval, transformation and analysis of the data from the Barcode of Life Data Systems (BOLD) database <https://boldsystems.org/>. This package allows both public and private user data to be easily downloaded into the R environment using a variety of inputs such as: IDs (processid, sampleid), BINs, dataset codes, project codes, taxonomy, geography etc. It provides frictionless data conversion into formats compatible with other R-packages and third-party tools, as well as functions for sequence alignment & clustering, biodiversity analysis and spatial mapping."
+  license: MIT
+  homepage: https://boldsystems.org/
+
+extra:
+  recipe-maintainers:
+    - 
